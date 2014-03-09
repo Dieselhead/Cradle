@@ -110,4 +110,5 @@ int CradleMesh::GetNumVertices()
 void CradleMesh::Draw(DirectX::XMFLOAT4X4* matrix)
 {
 	m_fileManager->DrawMesh(m_name, matrix);
+	// m_fileManager->DrawMesh(matrix);
 }

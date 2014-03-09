@@ -11,6 +11,10 @@ ObjModel::ObjModel()
 
 	m_uniqueVerts = 0;
 	m_indices = 0;
+	m_normalIndices = 0;
+
+	m_uniqueNormals = 0;
+	m_uniqueTexCoords = 0;
 }
 
 ObjModel::~ObjModel()
@@ -33,13 +37,26 @@ void ObjModel::Release()
 	if (m_indices) delete[] m_indices;
 	m_indices = nullptr;
 
+	if (m_normalIndices) delete[] m_normalIndices;
+	m_normalIndices = nullptr;
+
+	if (m_texIndices) delete[] m_texIndices;
+	m_texIndices = nullptr;
+
+
 	if (m_uniqueVerts) delete[] m_uniqueVerts;
 	m_uniqueVerts = nullptr;
+
+	if (m_uniqueNormals) delete[] m_uniqueNormals;
+	m_uniqueNormals = nullptr;
+
+	if (m_uniqueTexCoords) delete[] m_uniqueTexCoords;
+	m_uniqueTexCoords = nullptr;
 }
 
-bool ObjModel::LoadOBJ(char* fileName)
+bool ObjModel::LoadOBJ(const wchar_t* fileName)
 {
-	wprintf_s(L"Loading Obj");
+	wprintf_s(L"Loading Obj from: %s\n", fileName);
 
 	std::ifstream fileStream;
 	int fileSize = 0;
@@ -161,12 +178,27 @@ bool ObjModel::LoadOBJ(char* fileName)
 
 	m_vertices = new float[m_totalVerts * 3];
 
+
+
+
 	wprintf_s(L"FACES.SIZE: %d\nNUM FACES: %d\n", faces.size(), numFaces);
+	// Indices from faces
+	// There will be doubles in these
+	// Indices should be in range of 0 -> m_totalUniqueVerts-1
 	m_indices = new int[m_totalVerts];
+	m_normalIndices = new int[m_totalVerts];
+	m_texIndices = new int[m_totalVerts];
+
 	m_totalIndices = m_totalVerts;
+
 	m_uniqueVerts = new float[verts.size()];
 	m_totalUniqueVerts = verts.size();
+
 	m_uniqueNormals = new float[norms.size()];
+	m_totalUniqueNormals = norms.size();
+
+	m_uniqueTexCoords = new float[texC.size()];
+	m_totalUniqueTexCoords = texC.size();
 
 	for (int i = 0; i < norms.size(); i++)
 	{
@@ -175,12 +207,17 @@ bool ObjModel::LoadOBJ(char* fileName)
 
 	for (int i = 0; i < verts.size(); i++)
 	{
-		if (i % 3 == 0)
-		{
-			// wprintf_s(L"UniqueVert(%f, %f, %f)\n", verts[i], verts[i + 1], verts[i + 2]);
-		}
 		m_uniqueVerts[i] = verts[i];
 	}
+
+	for (int i = 0; i < texC.size(); i++)
+	{
+		m_uniqueTexCoords[i] = texC[i];
+	}
+
+
+
+
 
 	if ((int)norms.size() != 0)
 	{
@@ -194,17 +231,13 @@ bool ObjModel::LoadOBJ(char* fileName)
 
 	for (int f = 0; f < (int)faces.size(); f += 3)
 	{
-		/*
-		if (f % 9 == 0)
-			wprintf_s(L"\n");
+		
 
-		if (f % 9 == 0)
-			wprintf_s(L"Face: ");
+		m_indices[iIndex] = faces[f]-1;
+		m_texIndices[iIndex] = faces[f + 1] - 1;
+		m_normalIndices[iIndex] = faces[f + 2] - 1;
 
-		wprintf_s(L"%d, ", faces[f]);
-		*/
-
-		m_indices[iIndex++] = faces[f]-1;
+		iIndex++;
 
 		m_vertices[vIndex + 0] = verts[(faces[f + 0] - 1) * 3 + 0];
 		m_vertices[vIndex + 1] = verts[(faces[f + 0] - 1) * 3 + 1];

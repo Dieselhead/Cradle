@@ -137,7 +137,4 @@
       <Filter>Resource Files\Shaders\PS</Filter>
     </FxCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
 </Project>

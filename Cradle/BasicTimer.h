@@ -13,6 +13,11 @@ private:
 	float m_delta;
 	float m_total;
 
+
+
+	LARGE_INTEGER m_foo;
+	float m_fooTotal;
+
 public:
 	BasicTimer();
 	void Reset();
@@ -20,6 +25,8 @@ public:
 	float GetTotal();
 	float GetDelta();
 
+	float UpdateFoo();
+	float GetFoo();
 };
 
 

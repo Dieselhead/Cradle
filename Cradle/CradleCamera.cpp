@@ -150,60 +150,36 @@ void CradleCamera::UpdateControls()
 
 	if (m_game->m_cInput->KeyDown(DIK_W))
 	{
-		wprintf_s(L"Old position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 		v = DirectX::XMLoadFloat3(&m_vPosition);
 		v2 = DirectX::XMLoadFloat3(&m_vForward);
 		v2 = v2 * dt * m_Speed;
 		v += v2;
 		DirectX::XMStoreFloat3(&m_vPosition, v);
-
-		wprintf_s(L"New position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	}
 	else if (m_game->m_cInput->KeyDown(DIK_S))
 	{
-		wprintf_s(L"Old position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 		v = DirectX::XMLoadFloat3(&m_vPosition);
 		v2 = DirectX::XMLoadFloat3(&m_vForward);
 		v2 = v2 * dt * -m_Speed;
 		v += v2;
 		DirectX::XMStoreFloat3(&m_vPosition, v);
-
-		wprintf_s(L"New position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	}
 
 	if (m_game->m_cInput->KeyDown(DIK_D))
 	{
-		wprintf_s(L"Old position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 		v = DirectX::XMLoadFloat3(&m_vPosition);
 		v2 = DirectX::XMLoadFloat3(&m_vRight);
 		v2 = v2 * dt * m_Speed;
 		v += v2;
 		DirectX::XMStoreFloat3(&m_vPosition, v);
-
-		wprintf_s(L"New position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	}
 	else if (m_game->m_cInput->KeyDown(DIK_A))
 	{
-		wprintf_s(L"Old position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 		v = DirectX::XMLoadFloat3(&m_vPosition);
 		v2 = DirectX::XMLoadFloat3(&m_vRight);
 		v2 = v2 * dt * -m_Speed;
 		v += v2;
 		DirectX::XMStoreFloat3(&m_vPosition, v);
-
-		wprintf_s(L"New position(%f, %f, %f)\n",
-			m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	}
 
 	if (m_game->m_cInput->KeyDown(DIK_R))

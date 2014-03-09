@@ -10,6 +10,7 @@ struct VSInput
 {
 	float4 pos : POSITION;
 	float3 normal : NORMAL;
+	float2 tex0 : TEXCOORD0;
 	float4x4 w0 : OBJ0;
 	// float4 w1 : OBJ1;
 	// float4 w2 : OBJ2;
@@ -21,6 +22,7 @@ struct PSInput
 {
 	float4 p : SV_POSITION;
 	float3 c : NORMAL;
+	float2 tex0 : TEXCOORD0;
 };
 
 
@@ -72,6 +74,9 @@ PSInput VSMain(VSInput foo)
 
 	psin.p = op;
 	psin.c = mul(nom, mx);
+	// psin.c = nom;
+
+	psin.tex0 = foo.tex0;
 
 	return psin;
 }
@@ -80,10 +85,22 @@ float4 PSMain(PSInput psin) : SV_TARGET
 {
 
 	// psin.c = normalize(psin.c);
+
 	psin.c.x = (psin.c.x + 1.0f) * 0.5f;
 	psin.c.y = (psin.c.y + 1.0f) * 0.5f;
 	psin.c.z = (psin.c.z + 1.0f) * 0.5f;
 
-	return float4(psin.c.x, psin.c.y, psin.c.z, 1.0f);
+	// float r = dot(float3(1, 0, 0), psin.c.x);
+	// float g = dot(float3(0, 1, 0), psin.c.y);
+	// float b = dot(float3(0, 0, 1), psin.c.z);
+
+
+	// Texcoords
+	// return float4(psin.tex0.xy, 0.0f, 1.0f);
+
+	// Normals
+	return float4(psin.c.xyz, 1.0f);
+
+
 	return float4(1.0f, 1.0f, 1.0f, 1.0f);
 }

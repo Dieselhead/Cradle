@@ -18,6 +18,8 @@ public:
 	virtual void Draw();
 	virtual void Initialize();
 
+	void SetMesh(CradleMesh* mesh);
+
 public:
 	DirectX::XMFLOAT4X4 m_mWorld;
 	DirectX::XMFLOAT4X4 m_mTransform;
@@ -34,6 +36,7 @@ public:
 
 	CradleMesh* m_mesh;
 	float m_rotationRate;
+
 };
 
 #endif

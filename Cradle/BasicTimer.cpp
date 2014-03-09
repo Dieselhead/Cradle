@@ -45,6 +45,25 @@ void BasicTimer::Update()
 	m_lastTime = m_currentTime;
 }
 
+float BasicTimer::UpdateFoo()
+{
+	if (!QueryPerformanceCounter(&m_foo))
+	{
+		// Error
+	}
+
+	m_fooTotal = static_cast<float>(
+		static_cast<double>(m_foo.QuadPart - m_startTime.QuadPart) /
+		static_cast<double>(m_frequency.QuadPart));
+
+	return GetFoo();
+}
+
+float BasicTimer::GetFoo()
+{
+	return m_fooTotal;
+}
+
 float BasicTimer::GetTotal()
 {
 	return m_total;

@@ -34,8 +34,8 @@ public:
 	void SetOutputWindow(CradleWindow* newWindow);
 
 	CradleActor* m_Actor;
-	const int m_numActors = 5;
-	const wchar_t* m_meshToUse = L"cube";
+	const int m_numActors = 3000;
+	const wchar_t* m_meshToUse = L"monkey";
 
 	int m_fps;
 	float m_total;
@@ -55,6 +55,8 @@ public:
 
 
 	ID3D11Buffer* m_vertexBuffer;
+
+	void UpdateActor(CradleActor* actors, int start, int count);
 
 	
 

@@ -17,6 +17,10 @@
 #include <unordered_map>
 #include <strsafe.h>
 
+#include <random>
+
+
+#include <thread>
 
 
 
@@ -158,6 +162,14 @@ LRESULT OnDestroy(CradleWindow& window, HWND hWnd, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+void PrintNumber(int* arr, int start, int count)
+{
+	for (int i = start; i < start + count; i++)
+	{
+		wprintf_s(L"i: %d\n", arr[i]);
+	}
+}
+
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
@@ -166,7 +178,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	freopen_s(&stream, "CONOUT$", "wb", stdout);
 	int result = _setmode(_fileno(stdout), _O_U8TEXT);
 	// int result = _setmode(_fileno(stdout), _O_U16TEXT);
+
+
 	
+
+
+
 	
 	CradleWindow* w1 = new CradleWindow();
 
@@ -182,47 +199,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	
 
 
-
-	std::list<float> list_foo;
-
-
-
-	std::unordered_map<std::wstring, std::list<float>> toDraw;
-	std::list<float>::iterator float_it;
-
-	std::unordered_map<std::wstring, std::list<float>>::iterator map_it;
-
-	toDraw[L"Foo"] = list_foo;
-
-	toDraw[L"Foo"].push_back(1.0f);
-	toDraw[L"Foo"].push_back(2.0f);
-
-	toDraw[L"Bar"] = std::list<float>();
-
-	toDraw[L"Bar"].push_back(13.0f);
-	toDraw[L"Bar"].push_back(32.0f);
-	toDraw[L"Bar"].push_back(45.0f);
-	toDraw[L"Bar"].push_back(65.0f);
-
-
-
-	for (map_it = toDraw.begin(); map_it != toDraw.end(); map_it++)
-	{
-		std::wstring ut = L"Name: " + map_it->first;
-		ut.append(L"\n");
-
-		wchar_t* buffer = new wchar_t[256];
-
-		for (float_it = map_it->second.begin(); float_it != map_it->second.end(); float_it++)
-		{
-			StringCbPrintfW(buffer, sizeof(LPWSTR)* 256, L"Value: %f\n", *float_it);
-			ut.append(buffer);
-		}
-
-		wprintf_s(ut.c_str());
-
-		delete[] buffer;
-	}
 
 
 

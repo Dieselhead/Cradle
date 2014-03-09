@@ -12,6 +12,7 @@ namespace CradleVertexDeclarations
 	{
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 normal;
+		DirectX::XMFLOAT2 tex0;
 		// DirectX::XMFLOAT2 tex0;
 
 		/*
@@ -56,6 +57,15 @@ namespace CradleVertexDeclarations
 			, 12							// Aligned byte offset
 			, D3D11_INPUT_PER_VERTEX_DATA	// Input slot class
 			, 0								// Instance data step rate
+		},
+		{
+			"TEXCOORD"
+			, 0
+			, DXGI_FORMAT_R32G32_FLOAT
+			, 0
+			, 24
+			, D3D11_INPUT_PER_VERTEX_DATA
+			, 0
 		},
 		{
 			"OBJ",

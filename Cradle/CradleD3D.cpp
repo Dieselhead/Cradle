@@ -451,6 +451,10 @@ HRESULT CradleD3D::CompileShader(LPCWSTR sourceFile, LPCSTR entryPoint, LPCSTR p
 
 			// delete[] wstr;
 		}
+		else
+		{
+			wprintf_s(L"NO error blob?\n");
+		}
 
 		if (shaderBlob)
 			shaderBlob->Release();
